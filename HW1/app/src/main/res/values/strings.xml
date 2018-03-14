@@ -1,0 +1,13 @@
+<resources>
+    <string name="Title">婚姻建議</string>
+    <string name="Sex">性別(sex)</string>
+    <string name="Sex_Hint">(輸入性別)</string>
+    <string name="Age">年齡(age)</string>
+    <string name="Age_Hint">(輸入年齡)</string>
+    <string name="Btn_Send_Text">確定</string>
+    <string name="Suggest_Text">建議：</string>
+    <string name="male">男</string>
+    <string name="not_hurry">還不急。</string>
+    <string name="get_marry">趕快結婚！</string>
+    <string name="find_couple">開始找對象。</string>
+</resources>

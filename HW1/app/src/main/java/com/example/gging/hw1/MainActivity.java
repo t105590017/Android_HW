@@ -36,16 +36,16 @@ public class MainActivity extends AppCompatActivity {
                 if(Age < 30)
                     Sug += getString(R.string.not_hurry);
                 else if(Age > 35)
-                    Sug += getString(R.string.find_couple);
-                else
                     Sug += getString(R.string.get_marry);
+                else
+                    Sug += getString(R.string.find_couple);
             else
             if(Age < 28)
                 Sug += getString(R.string.not_hurry);
             else if(Age > 32)
-                Sug += getString(R.string.find_couple);
-            else
                 Sug += getString(R.string.get_marry);
+            else
+                Sug += getString(R.string.find_couple);
 
             mSuggest.setText(Sug);
         }

@@ -3,51 +3,103 @@ package com.example.gging.hw1;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.NumberPicker;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText mEdtSex, mEdtAge;
-    private Button mBtnSen;
-    private TextView mSuggest;
+    private Spinner vSpnSex;
+    private RadioGroup vRadGrp;
+    private RadioButton vRadBAge1;
+    private RadioButton vRadBAge2;
+    private RadioButton vRadBAge3;
+    private TextView vTxtNFamily;
+    private NumberPicker vNumPFamily;
+    private Button vBtnOK;
+    private TextView vTxtSug;
+
+    private String selectedSex;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mEdtSex = (EditText) findViewById(R.id.value_of_sex);
-        mEdtAge = (EditText) findViewById(R.id.value_of_age);
-        mBtnSen = (Button) findViewById(R.id.Btn_Send_Out);
-        mSuggest = (TextView) findViewById(R.id.txt_suggest);
+        vSpnSex = (Spinner) findViewById(R.id.spnSex);
+        vRadGrp = (RadioGroup) findViewById(R.id.radGAge);
+        vRadBAge1 = (RadioButton) findViewById(R.id.radBAge1);
+        vRadBAge2 = (RadioButton) findViewById(R.id.radBAge2);
+        vRadBAge3 = (RadioButton) findViewById(R.id.radBAge3);
+        vTxtNFamily = (TextView) findViewById(R.id.txtNFamily);
+        vNumPFamily = (NumberPicker) findViewById(R.id.numPFamily);
+        vNumPFamily.setMinValue(0);
+        vNumPFamily.setMaxValue(20);
+        vNumPFamily.setValue(3);
+        vBtnOK = (Button) findViewById(R.id.btnOK);
+        vTxtSug = (TextView) findViewById(R.id.txtSug);
 
-        mBtnSen.setOnClickListener(Btn_Send_OutOnClick);
+        vSpnSex.setOnItemSelectedListener(spnOselect);
+        vNumPFamily.setOnValueChangedListener(NumPFamilyChange);
+        vBtnOK.setOnClickListener(BtnOKClick);
     }
 
-    private View.OnClickListener Btn_Send_OutOnClick = new View.OnClickListener() {
+    private AdapterView.OnItemSelectedListener spnOselect =new AdapterView.OnItemSelectedListener() {
         @Override
-        public void onClick(View view) {
-            String Sex = mEdtSex.getText().toString();
-            int Age = Integer.parseInt((mEdtAge.getText().toString()));
-            String Sug = getString(R.string.Suggest_Text);
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            switch (parent.getSelectedItem().toString()) {
+                case "male":
+                    vRadBAge1.setText(getString(R.string.maleAgeRange1));
+                    vRadBAge2.setText(getString(R.string.maleAgeRange2));
+                    vRadBAge3.setText(getString(R.string.maleAgeRange3));
+                    break;
+                case "female":
+                    vRadBAge1.setText(getString(R.string.femaleAgeRange1));
+                    vRadBAge2.setText(getString(R.string.femaleAgeRange2));
+                    vRadBAge3.setText(getString(R.string.femaleAgeRange3));
+                    break;
+            }
+        }
 
-            if(Sex.equals(getString(R.string.male)))
-                if(Age < 30)
-                    Sug += getString(R.string.not_hurry);
-                else if(Age > 35)
-                    Sug += getString(R.string.get_marry);
-                else
-                    Sug += getString(R.string.find_couple);
-            else
-            if(Age < 28)
-                Sug += getString(R.string.not_hurry);
-            else if(Age > 32)
-                Sug += getString(R.string.get_marry);
-            else
-                Sug += getString(R.string.find_couple);
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
 
-            mSuggest.setText(Sug);
+        }
+    };
+
+    private NumberPicker.OnValueChangeListener NumPFamilyChange = new NumberPicker.OnValueChangeListener() {
+        @Override
+        public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+            vTxtNFamily.setText(String.valueOf((newVal)));
+        }
+    };
+
+    private View.OnClickListener BtnOKClick =new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            MarriageSuggestion Sug = new MarriageSuggestion();
+
+            String strSex = vSpnSex.getSelectedItem().toString();
+            int AgeR = 0;
+
+            switch (vRadGrp.getCheckedRadioButtonId()){
+                case R.id.radBAge1:
+                    AgeR = 1;
+                    break;
+                case R.id.radBAge2:
+                    AgeR = 2;
+                    break;
+                case R.id.radBAge3:
+                    AgeR = 3;
+                    break;
+            }
+
+            vTxtSug.setText(Sug.getSuggestion(strSex, AgeR, vNumPFamily.getValue()));
         }
     };
 }

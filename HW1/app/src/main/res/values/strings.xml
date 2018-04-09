@@ -1,5 +1,5 @@
 <resources>
-    <string name="Title">作業三:林彥儒</string>
+    <string name="Title" translatable="false">作業三:林彥儒</string>
     <string name="sex">性別</string>
     <string name="age">年齡</string>
     <string name="maleAgeRange1">小於30歲</string>

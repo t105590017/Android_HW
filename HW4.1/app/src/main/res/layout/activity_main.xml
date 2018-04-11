@@ -16,32 +16,41 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/sex"
-            android:textSize="18sp" />
+            android:textSize="40sp" />
 
         <RadioGroup
+            android:id="@+id/radGsex"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <RadioButton
                 android:id="@+id/btnFemale"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:layout_weight="1"
                 android:text="@string/female" />
 
             <RadioButton
                 android:id="@+id/btnMale"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:layout_weight="1"
                 android:text="@string/male" />
         </RadioGroup>
 
         <Spinner
-            android:id="@+id/spnSex"
+            android:id="@+id/spnMale"
+
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:entries="@array/sex_list"
+            android:layout_height="60dp"
+            android:entries="@array/male_age"
+            android:spinnerMode="dropdown" />
+
+        <Spinner
+            android:id="@+id/spnFemale"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:entries="@array/female_age"
             android:spinnerMode="dropdown" />
 
         <ScrollView

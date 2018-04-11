@@ -6,9 +6,15 @@
     <string name="age">年齡</string>
     <string name="btnOK">確定</string>
     <string name="select">您的興趣：</string>
-    <string-array name="sex_list">
-        <item>male</item>
-        <item>female</item>
+    <string-array name="male_age">
+        <item>小於30歲</item>
+        <item>30~40歲</item>
+        <item>大於40歲</item>
+    </string-array>
+    <string-array name="female_age">
+        <item>小於28歲</item>
+        <item>28~35歲</item>
+        <item>大於35歲</item>
     </string-array>
     <string name="music">音樂</string>
     <string name="sing">唱歌</string>

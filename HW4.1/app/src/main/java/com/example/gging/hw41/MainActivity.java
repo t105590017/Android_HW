@@ -4,17 +4,26 @@ import android.app.assist.AssistStructure;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    private RadioGroup _radGsex;
+    private RadioButton _btnmale,_btnfemale;
+    private Spinner _spnAge;
     private CheckBox _chkMusic,_chkSing,_chkDance,_chkTravel
             ,_chkReading,_chkWriting,_chkClimbing,_chkSwim
             ,_chkEating,_chkDrawing;
     private Button _btnOK;
     private TextView _textSelect;
+
+    private ArrayAdapter<CharSequence> ArrMale ,ArrFemale;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         _chkDance = (CheckBox) findViewById(R.id.chkDance);
         _chkTravel = (CheckBox) findViewById(R.id.chkTravel);
         _chkReading = (CheckBox) findViewById(R.id.chkReading);
-        _chkWriting = (CheckBox)findViewById(R.id.chkWriting);
+        _chkWriting = (CheckBox) findViewById(R.id.chkWriting);
         _chkClimbing = (CheckBox) findViewById(R.id.chkClimbing);
         _chkSwim = (CheckBox) findViewById(R.id.chkSwim);
         _chkEating = (CheckBox) findViewById(R.id.chkEating);
@@ -36,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         _textSelect = (TextView) findViewById(R.id.txtSelect);
 
         _btnOK.setOnClickListener(btnOKOnclick);
+
     }
 
     private View.OnClickListener btnOKOnclick = new View.OnClickListener() {

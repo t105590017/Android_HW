@@ -1,0 +1,90 @@
+package com.example.gging.hw8;
+
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+
+import static java.util.Calendar.*;
+
+public class MainActivity extends AppCompatActivity {
+
+    private String Year, Mon, Day;
+    private ArrayList<String> datalist;
+
+    private Spinner mspnMeal;
+    private EditText mtxtDate, mtxtAmount;
+    private DatePicker mdataPicker;
+    private Button mbtnSubmit, mbtnRecord;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        datalist = new ArrayList<>();
+
+        mspnMeal = (Spinner) findViewById(R.id.spnMeal);
+        mtxtDate = (EditText) findViewById(R.id.txtDate);
+        mdataPicker =(DatePicker) findViewById(R.id.datap);
+        mtxtAmount = (EditText) findViewById(R.id.txtAmount);
+        mbtnSubmit = (Button) findViewById(R.id.btnSubmit);
+        mbtnRecord = (Button) findViewById(R.id.btnRecord);
+
+        mbtnSubmit.setOnClickListener(btnSubmitOnClick);
+        mbtnRecord.setOnClickListener(btnRecordOnClick);
+        mdataPicker.setOnDateChangedListener(dataPickerChang);
+
+        mdataPicker.init(Calendar.getInstance().get(Calendar.YEAR),
+                Calendar.getInstance().get(Calendar.MONTH),
+                Calendar.getInstance().get(Calendar.DAY_OF_MONTH),dataPickerChang);
+    }
+
+    private DatePicker.OnDateChangedListener dataPickerChang = new DatePicker.OnDateChangedListener() {
+        @SuppressLint("SetTextI18n")
+        @Override
+        public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            Year = String.valueOf(year);
+            Mon = String.valueOf(monthOfYear);
+            Day = String.valueOf(dayOfMonth);
+
+            mtxtDate.setText(Year+"/"+Mon+"/"+Day);
+        }
+    };
+
+    private View.OnClickListener btnSubmitOnClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            String data;
+            data = "項目" + String.valueOf(datalist.size()) +"        "+
+                    mtxtDate.getText() + "      " +
+                    mspnMeal.getSelectedItem().toString() + "        "+
+                    mtxtAmount.getText();
+
+            datalist.add(data);
+        }
+    };
+
+    private View.OnClickListener btnRecordOnClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent();
+            intent.setClass(MainActivity.this,RecordsActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putStringArrayList("DataList",datalist);
+            intent.putExtras(bundle);
+
+            startActivity(intent);
+        }
+    };
+
+}

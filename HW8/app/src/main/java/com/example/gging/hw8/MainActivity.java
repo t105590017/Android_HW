@@ -10,6 +10,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -71,6 +72,9 @@ public class MainActivity extends AppCompatActivity {
                     mtxtAmount.getText();
 
             datalist.add(data);
+
+            Toast toast = Toast.makeText(MainActivity.this,mtxtAmount.getText(),Toast.LENGTH_SHORT);
+            toast.show();
         }
     };
 

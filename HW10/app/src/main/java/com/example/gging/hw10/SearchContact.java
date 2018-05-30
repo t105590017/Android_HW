@@ -19,7 +19,7 @@ public class SearchContact extends Fragment {
     private static final int MENU_ADD = Menu.FIRST,
                             MENU_SEARCH = Menu.FIRST + 1;
 
-    private EditText medtname,
+    public EditText medtname,
                     medtnumber,
                     medtphonetype;
     LinearLayout bg;

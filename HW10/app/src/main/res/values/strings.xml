@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">作業十：林彥儒</string>
+    <string name="add_new_contact">加入</string>
+    <string name="search_contact">查詢</string>
+    <string name="name">名稱：</string>
+    <string name="number">號碼：</string>
+   <string-array name="phone_number_type">
+       <item>手機</item>
+       <item>住家</item>
+       <item>辦公</item>
+   </string-array>
+</resources>

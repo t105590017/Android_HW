@@ -58,7 +58,7 @@ public class SearchContact extends Fragment {
             case MENU_ADD:
                 break;
             case MENU_SEARCH:
-                mainActivity.ContactList(medtname, medtnumber, medtphonetype);
+                mainActivity.ContactList();
                 break;
         }
         return super.onContextItemSelected(item);

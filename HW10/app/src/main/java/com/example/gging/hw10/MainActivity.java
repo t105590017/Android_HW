@@ -85,7 +85,10 @@ public class MainActivity extends AppCompatActivity {
         mContactDB.insert(DB_TABLE, null, contentValues);
     }
 
-    public void ContactList(TextView editname, TextView editnumber, TextView editphonetype) {
+    public void ContactList() {
+        TextView editname = searchContact.medtname;
+        TextView editnumber = searchContact.medtnumber;
+        TextView editphonetype = searchContact.medtphonetype;
         Cursor cursor = mContactDB.query(true, DB_TABLE,
                 new String[]{"name", "number", "phonetype"},
                 null, null, null, null, null, null);
@@ -105,22 +108,6 @@ public class MainActivity extends AppCompatActivity {
                 editname.append("\n" + cursor.getString(0));
                 editnumber.append("\n" + cursor.getString(1));
                 editphonetype.append("\n" + cursor.getString(2));
-            }
-        }
-    }
-
-    public void SetCursorToText(Cursor cursor, TextView textView,int columnlndex) {
-        if (cursor == null) {
-            return;
-        }
-        if(cursor.getCount() == 0) {
-            textView.setText("沒有資料");
-        }
-        else {
-            cursor.moveToFirst();
-            textView.setText(cursor.getString(columnlndex));
-            while (cursor.moveToNext()) {
-                textView.append("\n" + cursor.getString(columnlndex));
             }
         }
     }
@@ -154,27 +141,32 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onQueryTextChange(String newText) {
             Cursor cursor = null;
+
             if(!newText.equals("")) {
                 cursor = mContactDB.query(true, DB_TABLE, new String[]{"name", "number", "phonetype"},
                         "name=" + "\"" + newText + "\"", null, null, null, null, null);
 
-                if (cursor == null) {
-                    return false;
-                }
-                if(cursor.getCount() == 0) {
-                    searchContact.medtname.setText("沒有資料");
-                    searchContact.medtnumber.setText("");
-                    searchContact.medtphonetype.setText("");
+                if(newText == ""){
+                    ContactList();
                 }
                 else {
-                    cursor.moveToFirst();
-                    searchContact.medtname.setText(cursor.getString(0));
-                    searchContact.medtnumber.setText(cursor.getString(1));
-                    searchContact.medtphonetype.setText(cursor.getString(2));
-                    while (cursor.moveToNext()) {
-                        searchContact.medtname.append("\n" + cursor.getString(0));
-                        searchContact.medtnumber.append("\n" + cursor.getString(1));
-                        searchContact.medtphonetype.append("\n" + cursor.getString(2));
+                    if (cursor == null) {
+                        return false;
+                    }
+                    if (cursor.getCount() == 0) {
+                        searchContact.medtname.setText("沒有資料");
+                        searchContact.medtnumber.setText("");
+                        searchContact.medtphonetype.setText("");
+                    } else {
+                        cursor.moveToFirst();
+                        searchContact.medtname.setText(cursor.getString(0));
+                        searchContact.medtnumber.setText(cursor.getString(1));
+                        searchContact.medtphonetype.setText(cursor.getString(2));
+                        while (cursor.moveToNext()) {
+                            searchContact.medtname.append("\n" + cursor.getString(0));
+                            searchContact.medtnumber.append("\n" + cursor.getString(1));
+                            searchContact.medtphonetype.append("\n" + cursor.getString(2));
+                        }
                     }
                 }
             }
